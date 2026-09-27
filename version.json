@@ -1,0 +1,10 @@
+{
+  "app_name": "Naruto Ramen Bot",
+  "version": "1.0.2",
+  "release_date": "27/09/2026",
+  "download_url": "https://github.com/dophu25502hd-source/Naruto_Tools/releases/latest/download/ramen.exe",
+  "github_release_url": "https://github.com/dophu25502hd-source/Naruto_Tools/releases/latest",
+  "changelog": "- Bản phát hành chính thức v1.0.2: Tích hợp hệ thống Tự Động Kiểm Tra & Nâng Cấp Trực Tiếp Trên App (On-App Auto Update từ GitHub).\n- Thiết kế lại cụm nút Header bằng FlowLayoutPanel cố định góc phải, chống tràn/lệch nút trên mọi độ phân giải & DPI màn hình.\n- Nút Cập nhật trực quan, tự đổi màu cam nổi bật khi có bản nâng cấp mới.\n- Tự động thay thế file chạy (In-Place Swap) an toàn và khởi động lại mà không làm mất cấu hình và bản quyền.",
+  "mandatory": false,
+  "min_version": "1.0.0"
+}
