@@ -1,0 +1,59 @@
+==================================================================
+        HƯỚNG DẪN SỬ DỤNG TOOL AUTO HOANG MẠC PRO (v2.0.0)
+   (GIAO DIỆN WEBVIEW2, RADAR 2D ĐA BẢN ĐỒ & AUTO FARM THÔNG MINH)
+              GAME NARUTO ĐẠI CHIẾN (FLASH)
+==================================================================
+
+1. CÁC TÍNH NĂNG ĐỘT PHÁ MỚI TRÊN PHIÊN BẢN v2.0.0 (MÔ HÌNH WEBVIEW2 HIỆN ĐẠI):
+------------------------------------------------------------------
+- Giao Diện Web Hiện Đại Đẳng Cấp (Microsoft WebView2 + Glassmorphism Obsidian):
+  + Sử dụng kiến trúc Mô Hình 3 (C# WinForms Host WebView2): Vẫn là file .exe desktop nhưng giao diện là Web HTML5/CSS3/JavaScript cao cấp.
+  + Hiệu ứng Kính Mờ (Glassmorphism), màu nền Obsidian viền ánh sáng Neon tinh tế, không chói mắt, chuẩn phong cách cyberpunk tối giản.
+  + Thiết kế Không Khung Viền Truyền Thống (Frameless Window) với thanh tiêu đề tích hợp nút Thu nhỏ, Phóng to/Khôi phục, Đóng app.
+  + Trải nghiệm Kéo Thả Mượt Mà: Giữ chuột trái vào thanh tiêu đề để di chuyển cửa sổ tức thì, thả tay ra để cố định vị trí mà không bị trễ hay lag.
+  + Toàn bộ mã nguồn giao diện được tách biệt tại thư mục `ui/` (`ui/index.html`, `ui/style.css`, `ui/radar.js`, `ui/app.js`), cho phép tùy biến CSS/Giao diện theo ý thích mà không cần build lại C#!
+
+- Bản Đồ Radar 2D Đa Năng — HTML5 Canvas 60 FPS Siêu Mượt:
+  + Tự động bắt gói tin máy chủ game (CMD 4353 SrvSceneInfo, CMD 4354 SrvSelfSceneObject, CMD 4526, CMD 4525).
+  + Tự động nhận diện Tên Map, Mã Map (ID), Kích thước pixel chuẩn xác (MapWidth = resCol * 200, MapHeight = resRow * 200).
+  + Hoạt động chuẩn xác trên MỌI bản đồ: Làng Lá (Mộc Diệp), Lục Đạo Hoang Mạc, Rừng Chết, Thung Lũng Tận Cùng, các Phó Bản, Đấu Trường...
+  + Khung Radar tự động co giãn theo tỷ lệ khung hình thực tế của từng map (Aspect Ratio Fit), căn giữa chuẩn xác, không bị méo mó hình ảnh hay lệch tọa độ.
+- Nhận Diện Trực Quan Từng Loại Bản Đồ Chuẩn Xác:
+  + 🟢 Nhân vật của bạn: Chấm tròn Xanh Lá Neon viền trắng với hiệu ứng tỏa sóng Radar (Pulse Animation) liên tục.
+  + 🍜 Tô Ramen: Chấm tròn màu Vàng Kim sáng rực.
+  + 🔮 Ngọc Xanh Bí Thuật: Chấm tròn màu Tím Thạch Anh.
+  + ⚔️ Quái Vật: Chấm tròn màu Đỏ rực viền trắng, rê chuột thấy tên quái, cấp độ và UID.
+  + 🔵 NPC Bản Đồ (Trên các map thế giới ngoài Hoang Mạc): Chấm tròn màu Xanh Da Trời viền sáng.
+  + 🌀 Cổng Dịch Chuyển (Portal - Chỉ có trên các map liên thông khác, HOANG MẠC LÀ 1 MAP DUY NHẤT NÊN KHÔNG CÓ CỔNG): Biểu tượng hình thoi màu Ngọc Lam (Teal/Cyan) viền trắng.
+- Công Nghệ Click-To-Move Chuẩn Xác 100%:
+  + Click vào đất trống bất kỳ trên Radar: Nhân vật lập tức di chuyển mượt mà tới đúng tọa độ đó.
+  + Click vào Tô Ramen (🍜) hoặc Ngọc (🔮): Nhân vật tự động tiếp cận và NHẶT NGAY LẬP TỨC.
+  + Click vào Quái Vật (⚔️): Nhân vật tự động tiếp cận và KHIÊU CHIẾN NGAY LẬP TỨC.
+  + Click vào NPC (🔵 - Map thế giới): Nhân vật tự động chạy tới sát NPC và gửi lệnh mở đối thoại tương tác.
+  + Click vào Cổng Dịch Chuyển (🌀 - Map thế giới): Nhân vật tự động chạy thẳng vào tâm cổng để chuyển map.
+  + Lệnh click thủ công trên Radar luôn được ưu tiên cao nhất ngay cả khi bot đang bật Auto tuần tra!
+- Tooltip Tương Tác Thông Minh:
+  + Rê chuột tới bất kỳ vị trí nào trên Radar, bảng Tooltip sẽ hiển thị tọa độ (X, Y) và chi tiết đối tượng nằm dưới con trỏ chuột kèm gợi ý thao tác bằng tiếng Việt.
+- Thuật Toán Tìm Đường Gần Nhất (Nearest Target):
+  + Tích chọn [📍 Đi gần nhất]: Bot tự động tính khoảng cách Euclid và nhặt các mục tiêu gần nhân vật nhất trước, tăng tốc độ farm lên gấp 2 - 3 lần.
+- Đặt Thứ Tự Ưu Tiên Linh Hoạt & Chế Độ Tuần Tự:
+  + Tự do xếp thứ tự giữa Ramen, Đánh Quái và Ngọc Xanh. Tích chọn [🔄 Tuần tự] để dọn sạch từng loại theo cấp ưu tiên.
+- Tự Động Kiểm Tra & Nâng Cấp Trực Tiếp Trên App (On-App Auto Update từ GitHub):
+  + Nhận diện bản mới tức thì qua nút [🔄 Cập nhật], tự tải và hoán đổi file an toàn không mất bản quyền.
+
+2. QUY TRÌNH SỬ DỤNG AUTO:
+------------------------------------------------------------------
+- Bước 1: Mở file "ramen.exe" (hoặc chạy "Start_Tool_Ramen.bat").
+- Bước 2: Kiểm tra ô "Client:" xem đúng đường dẫn chứa "NarutoInfinityClient.exe" chưa (bấm 📁 để chọn nếu chưa đúng).
+- Bước 3: Bấm nút [▶ START] (Màu xanh).
+- Bước 4: Mở NarutoInfinityClient.exe và đăng nhập vào bất kỳ bản đồ nào trong game.
+  + Radar sẽ tự động hiển thị tên map thực tế và vị trí nhân vật ngay tức thì!
+- Bước 5: Cấu hình chế độ farm (khi vào Lục Đạo Hoang Mạc):
+  + Tích chọn các mục tiêu muốn làm: [🍜 Tô Ramen], [🔮 Ngọc Xanh], [⚔️ Đánh Quái Hoang Mạc].
+  + Đặt thứ tự ưu tiên tại khung [⭐ Thứ Tự Ưu Tiên & Chế Độ Thực Hiện].
+- Bước 6: Điều khiển trực tiếp bằng Radar 2D:
+  + Click đất trống để di chuyển nhân vật.
+  + Click Quái để đánh, click Ramen/Ngọc để nhặt.
+  + (Trên map thế giới ngoài Hoang Mạc: click NPC để mở thoại, click Cổng để chuyển map).
+- Bước 7: Bấm nút [▶ BẮT ĐẦU] (Màu tím) nếu muốn bot tự động tuần tra nhặt vật phẩm.
+==================================================================
