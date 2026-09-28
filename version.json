@@ -1,11 +1,10 @@
 {
   "app_name": "Hoang Mac Auto Pro",
-  "version": "2.0.0",
-  "release_date": "28/09/2026",
+  "version": "2.0.1",
+  "release_date": "29/09/2026",
   "download_url": "https://github.com/dophu25502hd-source/Naruto_Tools/raw/main/ramen.exe",
   "github_release_url": "https://github.com/dophu25502hd-source/Naruto_Tools",
-  "changelog": "- PHÁT HÀNH CHÍNH THỨC PHIÊN BẢN v2.0.0 (MÔ HÌNH KIẾN TRÚC MỚI WEBVIEW2 + RADAR 2D 60FPS):\n+ Nâng cấp toàn diện giao diện sang Microsoft WebView2 Glassmorphism Obsidian Dark Neon siêu mượt mà, chuẩn phong cách Cyberpunk hiện đại.\n+ Hỗ trợ di chuyển cửa sổ mượt mà tức thì: Giữ chuột trái vào thanh tiêu đề để kéo thả, nhả chuột để cố định vị trí (sử dụng Win32 GetAsyncKeyState & HTML5 Pointer Capture).\n+ Bản đồ Radar 2D Canvas 60 FPS đa năng trên toàn bộ map: Làng Lá, Hoang Mạc, Phó bản, Đấu Trường...\n+ Công nghệ Click-To-Move chuẩn xác 100%: Click di chuyển tự do, click nhặt Ramen/Ngọc, click đánh quái, click tương tác NPC & Cổng dịch chuyển.\n+ Tự động thích ứng gói tin Flash crossdomain policy (<policy-file-request/>), khởi tạo proxy mượt mà không xung đột client.\n+ Hoàn thiện cơ chế giao tiếp đa luồng WebView2 (Dispatcher / BeginInvoke), khắc phục triệt để lỗi refresh/re-enter map.\n+ Tích hợp đầy đủ Auto-Update trực tiếp từ GitHub Releases.",
+  "changelog": "- PHÁT HÀNH BẢN SỬA LỖI v2.0.1:\n+ Sửa triệt để lỗi crash 'FileNotFoundException: Microsoft.Web.WebView2.WinForms' khi tự động cập nhật phiên bản mới.\n+ Bổ sung trình tự động tìm kiếm và nạp Assembly (AssemblyResolve) từ thư mục ứng dụng.\n+ Tự động kiểm tra tính toàn vẹn và tải bổ sung đầy đủ các thư viện phụ trợ (WebView2 DLLs & runtimes) nếu bị thiếu.",
   "mandatory": false,
   "min_version": "1.0.0"
 }
-
