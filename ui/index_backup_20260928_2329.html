@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hoang Mac Auto Pro - WebView2</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="app-container">
+    
+    <!-- ── CUSTOM TITLEBAR (FRAMELESS) ── -->
+    <header class="titlebar" id="titlebar">
+      <div class="titlebar-left">
+        <div class="app-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="9"/>
+            <path d="M12 3v18"/>
+            <path d="M3 12h18"/>
+            <circle cx="12" cy="12" r="4" fill="currentColor"/>
+          </svg>
+        </div>
+        <div class="app-title-group">
+          <span class="app-title">Hoang Mac Auto Pro</span>
+          <span class="license-badge">★ Vĩnh viễn (Lifetime) [ADMIN]</span>
+        </div>
+      </div>
+
+      <div class="titlebar-right">
+        <button class="badge-btn update-btn" id="btnUpdate" title="Kiểm tra & Cập nhật phiên bản">
+          <span class="update-icon">✓</span> <span id="appVersion">v1.0.2</span>
+        </button>
+        <div class="status-badge offline" id="proxyStatusBadge">
+          <span class="status-dot"></span>
+          <span class="status-text" id="proxyStatusText">OFFLINE</span>
+        </div>
+
+        <!-- Window Controls -->
+        <div class="window-controls">
+          <button class="win-btn win-min" id="winMin" title="Thu nhỏ">
+            <svg viewBox="0 0 10 10"><path d="M0 5h10v1H0z"/></svg>
+          </button>
+          <button class="win-btn win-max" id="winMax" title="Phóng to / Khôi phục">
+            <svg viewBox="0 0 10 10"><rect x="1.5" y="1.5" width="7" height="7" fill="none" stroke="currentColor"/></svg>
+          </button>
+          <button class="win-btn win-close" id="winClose" title="Đóng">
+            <svg viewBox="0 0 10 10"><path d="M1 1l8 8M9 1L1 9" stroke="currentColor" stroke-width="1.2"/></svg>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- ── SETTINGS & CONTROLS DASHBOARD ── -->
+    <section class="dashboard-controls">
+      
+      <!-- Row 1: Client Path -->
+      <div class="glass-card client-path-card">
+        <label class="field-label" for="txtClientDir">Client:</label>
+        <div class="input-with-button">
+          <input type="text" id="txtClientDir" spellcheck="false" placeholder="Đường dẫn thư mục NarutoInfinityClient...">
+          <button class="btn btn-secondary btn-icon" id="btnBrowse" title="Chọn thư mục game">
+            <span>📁</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Row 2: Action Buttons & Delay -->
+      <div class="action-bar">
+        <button class="btn btn-emerald" id="btnStartProxy">
+          <span class="btn-icon-symbol">▶</span>
+          <span class="btn-label" id="lblStartProxy">START PROXY</span>
+        </button>
+
+        <button class="btn btn-purple" id="btnAutoBot" disabled>
+          <span class="btn-icon-symbol">▶</span>
+          <span class="btn-label" id="lblAutoBot">BẮT ĐẦU FARM</span>
+        </button>
+
+        <button class="btn btn-cyan" id="btnScanMap" disabled>
+          <span class="btn-icon-symbol">🔍</span>
+          <span class="btn-label">Quét Toàn Map</span>
+        </button>
+
+        <button class="btn btn-dark" id="btnResetLauncher">
+          <span class="btn-icon-symbol">🔄</span>
+          <span class="btn-label">Reset Launcher</span>
+        </button>
+
+        <div class="delay-control-box">
+          <label for="numDelay">Delay:</label>
+          <div class="delay-input-wrap">
+            <input type="number" id="numDelay" min="100" max="5000" step="100" value="800">
+            <span class="unit">ms</span>
+          </div>
+        </div>
+
+        <button class="btn btn-ghost" id="btnClearLog" title="Xóa trắng log">
+          <span>🗑 Clear</span>
+        </button>
+
+        <button class="btn btn-amber" id="btnExitBattle" title="Tự động bấm nút rời trận nếu bị kẹt">
+          <span>🚪 Thoát Trận</span>
+        </button>
+      </div>
+
+      <!-- Row 3: Target Checkboxes -->
+      <div class="checkbox-row">
+        <label class="custom-checkbox">
+          <input type="checkbox" id="chkPickRamen" checked>
+          <span class="checkbox-indicator"></span>
+          <span class="checkbox-text">🍜 Tô Ramen</span>
+        </label>
+
+        <label class="custom-checkbox">
+          <input type="checkbox" id="chkPickPearl" checked>
+          <span class="checkbox-indicator"></span>
+          <span class="checkbox-text">🔮 Ngọc Xanh</span>
+        </label>
+
+        <label class="custom-checkbox amber">
+          <input type="checkbox" id="chkAutoFightMonsters" checked>
+          <span class="checkbox-indicator"></span>
+          <span class="checkbox-text">⚔️ Đánh Quái</span>
+        </label>
+
+        <label class="custom-checkbox rose">
+          <input type="checkbox" id="chkAutoRevive" checked>
+          <span class="checkbox-indicator"></span>
+          <span class="checkbox-text">💖 Hồi Sinh 0s</span>
+        </label>
+
+        <label class="custom-checkbox emerald">
+          <input type="checkbox" id="chkAutoClickReturn" checked>
+          <span class="checkbox-indicator"></span>
+          <span class="checkbox-text">🚪 Tự Quay Lại</span>
+        </label>
+      </div>
+
+      <!-- Row 4: Priority & Mode Card -->
+      <div class="glass-card priority-card">
+        <div class="card-title">⭐ Thứ Tự Ưu Tiên & Chế Độ Thực Hiện</div>
+        <div class="priority-items-wrap">
+          <span class="prio-label">Ưu tiên:</span>
+          
+          <select id="cboPriority1" class="custom-select">
+            <option value="ramen">🍜 Tô Ramen</option>
+            <option value="monster">⚔️ Đánh Quái</option>
+            <option value="pearl">🔮 Ngọc Xanh</option>
+          </select>
+
+          <span class="arrow-sep">➔</span>
+
+          <select id="cboPriority2" class="custom-select">
+            <option value="monster" selected>⚔️ Đánh Quái</option>
+            <option value="ramen">🍜 Tô Ramen</option>
+            <option value="pearl">🔮 Ngọc Xanh</option>
+          </select>
+
+          <span class="arrow-sep">➔</span>
+
+          <select id="cboPriority3" class="custom-select">
+            <option value="pearl" selected>🔮 Ngọc Xanh</option>
+            <option value="ramen">🍜 Tô Ramen</option>
+            <option value="monster">⚔️ Đánh Quái</option>
+          </select>
+
+          <div class="prio-modes">
+            <label class="custom-checkbox emerald compact">
+              <input type="checkbox" id="chkSequentialPriority" checked>
+              <span class="checkbox-indicator"></span>
+              <span class="checkbox-text">🔄 Tuần tự</span>
+            </label>
+
+            <label class="custom-checkbox sky compact">
+              <input type="checkbox" id="chkNearestTarget" checked>
+              <span class="checkbox-indicator"></span>
+              <span class="checkbox-text">📍 Đi gần nhất</span>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Row 5: Monster Filter Card -->
+      <div class="glass-card monster-card">
+        <div class="card-title purple">🎯 Bộ Lọc Chọn Quái Vật Theo ID & Cấp Độ (Bắt Real-time từ Server)</div>
+        
+        <div class="monster-radios">
+          <label class="custom-radio">
+            <input type="radio" name="rgMonster" id="rbFightAll" value="all" checked>
+            <span class="radio-indicator"></span>
+            <span>Đánh tất cả quái vật</span>
+          </label>
+
+          <label class="custom-radio amber">
+            <input type="radio" name="rgMonster" id="rbFightSelected" value="selected">
+            <span class="radio-indicator"></span>
+            <span>Chỉ đánh các ID quái được chọn bên dưới:</span>
+          </label>
+        </div>
+
+        <div class="monster-filter-body">
+          <div class="monster-list-container" id="monsterListContainer">
+            <!-- Dynamic items rendered by JS -->
+            <div class="empty-monster-hint">Chưa phát hiện quái vật nào. Hãy kết nối vào Hoang Mạc hoặc bấm [🔍 Quét Toàn Map]!</div>
+          </div>
+
+          <div class="monster-actions-col">
+            <div class="search-input-wrap">
+              <span class="search-icon">🔍</span>
+              <input type="text" id="txtSearchMonster" placeholder="Tìm ID hoặc tên...">
+            </div>
+
+            <div class="btn-group-row">
+              <button class="btn btn-dark btn-sm" id="btnSelectAllMonsters">Chọn tất cả</button>
+              <button class="btn btn-dark btn-sm" id="btnDeselectAllMonsters">Bỏ chọn</button>
+            </div>
+
+            <button class="btn btn-danger btn-sm" id="btnClearMonsters">🗑 Xóa quái cũ</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Row 6: Stats & Radar Toggle Bar -->
+      <div class="glass-card stats-bar-card">
+        <div class="stats-indicators" id="statsIndicators">
+          <div class="stat-pill ramen">
+            <span class="stat-icon">🍜</span>
+            <span class="stat-title">Ramen:</span>
+            <span class="stat-val" id="statRamenCount">0</span>
+            <span class="stat-sub">(<span id="statGoldSpent">0</span> Lễ Kim)</span>
+          </div>
+
+          <div class="stat-divider">|</div>
+
+          <div class="stat-pill pearl">
+            <span class="stat-icon">🔮</span>
+            <span class="stat-title">Ngọc:</span>
+            <span class="stat-val" id="statPearlCount">0</span>
+            <span class="stat-sub">(<span id="statSilverSpent">0</span> Bạc)</span>
+          </div>
+
+          <div class="stat-divider">|</div>
+
+          <div class="stat-pill monster">
+            <span class="stat-icon">⚔️</span>
+            <span class="stat-title">Quái:</span>
+            <span class="stat-val" id="statMonsterCount">0</span>
+            <span class="stat-sub">(Thắng: <b id="statWinCount">0</b> | Thua: <b id="statLoseCount">0</b>)</span>
+          </div>
+
+          <div class="stat-divider">|</div>
+
+          <div class="stat-pill revive">
+            <span class="stat-icon">💖</span>
+            <span class="stat-title">Hồi sinh:</span>
+            <span class="stat-val" id="statReviveCount">0</span>
+          </div>
+        </div>
+
+        <button class="btn btn-indigo btn-radar-toggle" id="btnToggleRadar">
+          <span class="radar-dot-pulse"></span>
+          <span id="lblRadarToggle">📡 Radar: BẬT</span>
+        </button>
+      </div>
+
+    </section>
+
+    <!-- ── BOTTOM MAIN WORKSPACE (LOG & 2D RADAR) ── -->
+    <main class="workspace-bottom">
+      
+      <!-- Left: Terminal Log -->
+      <section class="log-panel glass-card">
+        <div class="panel-header">
+          <div class="panel-header-title">
+            <span class="terminal-icon">❯_</span> NHẬT KÝ HOẠT ĐỘNG (SYSTEM LOG)
+          </div>
+          <div class="log-actions">
+            <label class="autoscroll-toggle">
+              <input type="checkbox" id="chkAutoScroll" checked>
+              <span>Tự cuộn</span>
+            </label>
+            <button class="btn-micro" id="btnCopyLog" title="Sao chép toàn bộ log">📋 Sao chép</button>
+          </div>
+        </div>
+
+        <div class="log-content-wrapper" id="logContent">
+          <!-- Live log lines injected by JS -->
+        </div>
+      </section>
+
+      <!-- Right: Interactive 2D Tactical Radar -->
+      <section class="radar-panel glass-card" id="radarPanel">
+        <div class="panel-header radar-header">
+          <div class="panel-header-title">
+            <span class="radar-sweep-icon">📡</span> BẢN ĐỒ RADAR 2D THỜI GIAN THỰC
+          </div>
+          <div class="radar-map-info" id="radarMapInfo">
+            ● Chưa kết nối game (Bấm [▶ START PROXY] và mở NarutoInfinityClient)
+          </div>
+        </div>
+
+        <div class="canvas-container" id="canvasContainer">
+          <canvas id="radarCanvas"></canvas>
+          <div class="radar-tooltip" id="radarTooltip"></div>
+        </div>
+
+        <div class="radar-footer" id="radarFooter">
+          ● Trạng thái: Chờ game kết nối vào bản đồ...
+        </div>
+      </section>
+
+    </main>
+
+  </div>
+
+  <script src="radar.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
