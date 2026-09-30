@@ -227,13 +227,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
     for (const m of monsters) {
       const key = `${m.id}_${m.name}`;
+      const isBoss = m.isBoss || m.id === 50001 || (m.id >= 50000 && m.id <= 50100) || 
+                     (m.name && (m.name.toLowerCase().includes('boss') || m.name.toLowerCase().includes('босс') || m.name.toLowerCase().includes('shukaku') || m.name.toLowerCase().includes('шукаку')));
       if (!allMonstersMap.has(key)) {
         allMonstersMap.set(key, {
           id: m.id,
           name: m.name || `Quái vật ${m.id}`,
           level: m.level || 1,
+          isBoss: isBoss,
           checked: m.checked !== undefined ? m.checked : true
         });
+      } else {
+        const item = allMonstersMap.get(key);
+        if (isBoss) item.isBoss = true;
       }
     }
 
@@ -246,18 +252,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let count = 0;
     allMonstersMap.forEach((m, key) => {
-      const label = `ID: ${m.id} | ${m.name} (Lv.${m.level})`;
+      const isBoss = m.isBoss || m.id === 50001 || (m.id >= 50000 && m.id <= 50100) || 
+                     (m.name && (m.name.toLowerCase().includes('boss') || m.name.toLowerCase().includes('босс') || m.name.toLowerCase().includes('shukaku') || m.name.toLowerCase().includes('шукаку')));
+      const prefix = isBoss ? '👑 [BOSS] ' : '';
+      const label = `${prefix}ID: ${m.id} | ${m.name} (Lv.${m.level})`;
       if (filterText && !label.toLowerCase().includes(filterText)) {
         return;
       }
 
       count++;
       const item = document.createElement('label');
-      item.className = 'monster-item custom-checkbox';
+      item.className = 'monster-item custom-checkbox' + (isBoss ? ' gold' : '');
       item.innerHTML = `
         <input type="checkbox" data-key="${key}" ${m.checked ? 'checked' : ''}>
         <span class="checkbox-indicator"></span>
-        <span class="checkbox-text">${label}</span>
+        <span class="checkbox-text" style="${isBoss ? 'color: #fbbf24; font-weight: 700;' : ''}">${label}</span>
       `;
 
       item.querySelector('input').addEventListener('change', (e) => {

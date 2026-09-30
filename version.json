@@ -1,10 +1,10 @@
 {
   "app_name": "Hoang Mac Auto Pro",
-  "version": "2.5.0",
-  "release_date": "30/09/2026",
+  "version": "2.0.1",
+  "release_date": "29/09/2026",
   "download_url": "https://github.com/dophu25502hd-source/Naruto_Tools/raw/main/ramen.exe",
   "github_release_url": "https://github.com/dophu25502hd-source/Naruto_Tools",
-  "changelog": "- PHÁT HÀNH PHIÊN BẢN MỚI v2.5.0:\n+ Bổ sung tùy chọn '👑 Đánh Boss' (mặc định tắt - chủ động bỏ qua Boss Hoang Mạc khi cày quái).\n+ Phân loại thông minh Boss Hoang Mạc theo tên quái và hiển thị biểu tượng kim cương vàng trên Radar 2D.\n+ Nâng cấp độ mượt, giao diện chuẩn màu hoàng gia gold cho tính năng săn Boss.\n+ Khắc phục triệt để cơ chế nạp giao diện, chống tự động ghi đè file UI khi khởi động.",
+  "changelog": "- PHÁT HÀNH BẢN SỬA LỖI v2.0.1:\n+ Sửa triệt để lỗi crash 'FileNotFoundException: Microsoft.Web.WebView2.WinForms' khi tự động cập nhật phiên bản mới.\n+ Bổ sung trình tự động tìm kiếm và nạp Assembly (AssemblyResolve) từ thư mục ứng dụng.\n+ Tự động kiểm tra tính toàn vẹn và tải bổ sung đầy đủ các thư viện phụ trợ (WebView2 DLLs & runtimes) nếu bị thiếu.",
   "mandatory": false,
   "min_version": "1.0.0"
 }

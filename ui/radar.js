@@ -198,6 +198,11 @@ class TacticalRadar {
       const sp = this.gameToScreen(m.x, m.y);
       if (Math.hypot(sx - sp.x, sy - sp.y) <= hoverRadius) {
         const dist = Math.round(Math.hypot(m.x - this.playerX, m.y - this.playerY));
+        const isBoss = m.isBoss || m.id === 50001 || (m.id >= 50000 && m.id <= 50100) || 
+                       (m.name && (m.name.toLowerCase().includes('boss') || m.name.toLowerCase().includes('босс')));
+        if (isBoss) {
+          return `<b>👑 BOSS: ${m.name || 'Boss Hoang Mạc'}</b><br>ID: ${m.id} | Cấp: ${m.level || 50}<br>Cách bạn: ${dist} px`;
+        }
         return `<b>⚔️ Quái: ${m.name || 'Quái vật'}</b><br>ID: ${m.id} | Cấp: ${m.level || 1}<br>Cách bạn: ${dist} px`;
       }
     }
@@ -396,15 +401,35 @@ class TacticalRadar {
     // 7. Draw Monsters
     for (const m of this.monsters) {
       const sp = this.gameToScreen(m.x, m.y);
-      ctx.fillStyle = '#ef4444';
-      ctx.shadowColor = '#ef4444';
-      ctx.shadowBlur = 6;
-      ctx.beginPath();
-      ctx.arc(sp.x, sp.y, 4, 0, Math.PI * 2);
-      ctx.fill();
-      ctx.strokeStyle = '#ffffff';
-      ctx.lineWidth = 1;
-      ctx.stroke();
+      const isBoss = m.isBoss || m.id === 50001 || (m.id >= 50000 && m.id <= 50100) || 
+                     (m.name && (m.name.toLowerCase().includes('boss') || m.name.toLowerCase().includes('босс')));
+      
+      if (isBoss) {
+        // Draw Boss as gold diamond with glow
+        ctx.fillStyle = '#fbbf24';
+        ctx.shadowColor = '#fbbf24';
+        ctx.shadowBlur = 10;
+        ctx.beginPath();
+        ctx.moveTo(sp.x, sp.y - 8);
+        ctx.lineTo(sp.x + 7, sp.y);
+        ctx.lineTo(sp.x, sp.y + 8);
+        ctx.lineTo(sp.x - 7, sp.y);
+        ctx.closePath();
+        ctx.fill();
+        ctx.strokeStyle = '#ffffff';
+        ctx.lineWidth = 1.5;
+        ctx.stroke();
+      } else {
+        ctx.fillStyle = '#ef4444';
+        ctx.shadowColor = '#ef4444';
+        ctx.shadowBlur = 6;
+        ctx.beginPath();
+        ctx.arc(sp.x, sp.y, 4, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.strokeStyle = '#ffffff';
+        ctx.lineWidth = 1;
+        ctx.stroke();
+      }
     }
     ctx.shadowBlur = 0;
 
