@@ -34,6 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
     chkPickRamen: document.getElementById('chkPickRamen'),
     chkPickPearl: document.getElementById('chkPickPearl'),
     chkAutoFightMonsters: document.getElementById('chkAutoFightMonsters'),
+    chkAutoFightBoss: document.getElementById('chkAutoFightBoss'),
     chkAutoRevive: document.getElementById('chkAutoRevive'),
     chkAutoClickReturn: document.getElementById('chkAutoClickReturn'),
 
@@ -191,6 +192,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (s.pickRamen !== undefined) el.chkPickRamen.checked = s.pickRamen;
       if (s.pickPearl !== undefined) el.chkPickPearl.checked = s.pickPearl;
       if (s.autoFight !== undefined) el.chkAutoFightMonsters.checked = s.autoFight;
+      if (s.autoFightBoss !== undefined) el.chkAutoFightBoss.checked = s.autoFightBoss;
       if (s.autoRevive !== undefined) el.chkAutoRevive.checked = s.autoRevive;
       if (s.autoReturn !== undefined) el.chkAutoClickReturn.checked = s.autoReturn;
       if (s.sequential !== undefined) el.chkSequentialPriority.checked = s.sequential;
@@ -373,6 +375,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Settings Checkboxes
   const settingCheckboxes = [
     el.chkPickRamen, el.chkPickPearl, el.chkAutoFightMonsters,
+    el.chkAutoFightBoss,
     el.chkAutoRevive, el.chkAutoClickReturn,
     el.chkSequentialPriority, el.chkNearestTarget,
     el.rbFightAll, el.rbFightSelected
@@ -449,6 +452,7 @@ document.addEventListener('DOMContentLoaded', () => {
         pickRamen: el.chkPickRamen.checked,
         pickPearl: el.chkPickPearl.checked,
         autoFight: el.chkAutoFightMonsters.checked,
+        autoFightBoss: el.chkAutoFightBoss.checked,
         autoRevive: el.chkAutoRevive.checked,
         autoReturn: el.chkAutoClickReturn.checked,
         sequential: el.chkSequentialPriority.checked,

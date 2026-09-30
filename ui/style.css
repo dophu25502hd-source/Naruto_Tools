@@ -556,6 +556,12 @@ body.is-dragging * {
   box-shadow: 0 0 8px rgba(245, 158, 11, 0.5);
 }
 
+.custom-checkbox.gold input:checked + .checkbox-indicator {
+  background: #fbbf24;
+  border-color: #f59e0b;
+  box-shadow: 0 0 8px rgba(251, 191, 36, 0.6);
+}
+
 .custom-checkbox.rose input:checked + .checkbox-indicator {
   background: var(--accent-rose);
   border-color: var(--accent-rose);
