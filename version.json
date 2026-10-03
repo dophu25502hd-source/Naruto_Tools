@@ -1,10 +1,10 @@
 {
   "app_name": "Hoang Mac Auto Pro",
-  "version": "2.5.1",
-  "release_date": "30/09/2026",
+  "version": "3.0.0",
+  "release_date": "03/10/2026",
   "download_url": "https://github.com/dophu25502hd-source/Naruto_Tools/raw/main/ramen.exe",
   "github_release_url": "https://github.com/dophu25502hd-source/Naruto_Tools",
-  "changelog": "- PHÁT HÀNH BẢN CẬP NHẬT v2.5.1:\n+ Mở tool tức thì (< 1.5s), loại bỏ hoàn toàn delay 10-20s khi khởi động bằng cơ chế xác thực ngầm.\n+ Nhận diện chuẩn xác 100% Boss Hoang Mạc qua ID 50001 (Shukaku босс) và vẽ biểu tượng kim cương vàng trên Radar 2D.\n+ Tùy chọn '👑 Đánh Boss' (mặc định tắt - chủ động bỏ qua Boss khi cày quái).\n+ Khắc phục triệt để lỗi ghi đè giao diện UI.",
+  "changelog": "- PHÁT HÀNH BẢN CẬP NHẬT v3.0.0:\n+ Nâng cấp toàn diện cơ chế ổn định & bảo vệ tài khoản chuẩn hóa từ hệ thống lõi.\n+ Tối ưu hóa độ mượt và tính chuẩn xác 100% của Radar 2D cùng vòng lặp săn quái & nhặt Ramen.\n+ Tinh gọn giao diện điều khiển, loại bỏ các cài đặt rườm rà nhằm tối đa hóa trải nghiệm người dùng.\n+ Nâng cao hiệu năng tổng thể, loại bỏ hoàn toàn hiện tượng nghẽn gói tin khi cày cuốc thời gian dài.",
   "mandatory": false,
   "min_version": "1.0.0"
 }

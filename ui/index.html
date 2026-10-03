@@ -31,7 +31,7 @@
 
       <div class="titlebar-right">
         <button class="badge-btn update-btn" id="btnUpdate" title="Kiểm tra & Cập nhật phiên bản">
-          <span class="update-icon">✓</span> <span id="appVersion">v2.0.0</span>
+          <span class="update-icon">✓</span> <span id="appVersion">v3.0.0</span>
         </button>
         <div class="status-badge offline" id="proxyStatusBadge">
           <span class="status-dot"></span>
@@ -89,10 +89,10 @@
           <span class="btn-label">Reset Launcher</span>
         </button>
 
-        <div class="delay-control-box">
+        <div class="delay-control-box" style="display: none !important;">
           <label for="numDelay">Delay:</label>
           <div class="delay-input-wrap">
-            <input type="number" id="numDelay" min="100" max="5000" step="100" value="800">
+            <input type="number" id="numDelay" min="3000" max="3000" step="100" value="3000" readonly>
             <span class="unit">ms</span>
           </div>
         </div>

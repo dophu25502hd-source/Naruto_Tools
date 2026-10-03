@@ -167,7 +167,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // ── 4. STATE & STATS UPDATERS ──
   function updateAppState(state) {
     if (state.clientDir !== undefined) el.txtClientDir.value = state.clientDir;
-    if (state.delay !== undefined) el.numDelay.value = state.delay;
+    if (el.numDelay) el.numDelay.value = 3000;
 
     if (state.proxyRunning !== undefined) {
       isProxyRunning = state.proxyRunning;
@@ -366,9 +366,11 @@ document.addEventListener('DOMContentLoaded', () => {
   el.btnResetLauncher.addEventListener('click', () => sendToCSharp({ action: 'reset_launcher' }));
   el.btnExitBattle.addEventListener('click', () => sendToCSharp({ action: 'exit_battle' }));
 
-  el.numDelay.addEventListener('change', () => {
-    sendToCSharp({ action: 'set_delay', delay: parseInt(el.numDelay.value, 10) || 800 });
-  });
+  if (el.numDelay) {
+    el.numDelay.addEventListener('change', () => {
+      sendToCSharp({ action: 'set_delay', delay: 3000 });
+    });
+  }
 
   el.btnClearLog.addEventListener('click', () => {
     el.logContent.innerHTML = '';
@@ -469,7 +471,7 @@ document.addEventListener('DOMContentLoaded', () => {
         fightAll: el.rbFightAll.checked,
         selectedMonsters: selectedMonsterIds,
         priorityOrder: [el.cboPriority1.value, el.cboPriority2.value, el.cboPriority3.value],
-        delay: parseInt(el.numDelay.value, 10) || 800,
+        delay: 3000,
         showRadar: showRadar
       }
     };

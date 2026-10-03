@@ -475,7 +475,7 @@ body.is-dragging * {
 }
 
 .delay-control-box {
-  display: flex;
+  display: none !important;
   align-items: center;
   gap: 6px;
   background: var(--bg-surface);
